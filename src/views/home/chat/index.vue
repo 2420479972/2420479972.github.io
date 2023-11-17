@@ -21,8 +21,9 @@
 </template>
 <script lang="ts" setup>
 import Message from '@components/Message-Contact/index.vue'
-import { useToast } from '@/components/Toast'
-import { userModel } from '@/components/Model'
+import { useToast } from '@/components/Toast.tsx'
+import { userModel } from '@/components/Model.tsx'
+
 const { showModel } = userModel()
 
 const beforeClose = async () => {
