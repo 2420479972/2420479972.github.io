@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "../../../Desktop/d-app/node_modules/.bin/vite",
-    "build": "../../../Desktop/d-app/node_modules/.bin/vue-tsc && vite build",
+    "build": "vite build",
     "preview": "../../../Desktop/d-app/node_modules/.bin/vite preview"
   },
   "dependencies": {
