@@ -10,7 +10,8 @@ const __Model = defineComponent({
   },
   setup(props, { expose }) {
     const state = reactive({
-      visible: props.visible
+      visible: props.visible,
+      ok: null as any
     })
     const showModel = (sure: () => void) => {
       state.visible = true
@@ -19,17 +20,19 @@ const __Model = defineComponent({
     const hideModel = () => {
       state.visible = false
     }
-    const onOk = (check: boolean) => {
-      state.ok && state.ok(check, hideModel)
+    const onOk = async (check: boolean) => {
+      if (state.ok) {
+        await state.ok(check, hideModel)
+      }
     }
 
     expose({
-      showModel
+      showModel,
+      hideModel
     })
     return () => (
       <Model
         v-model:visible={state.visible}
-        on
         onOk={onOk}
       ></Model>
     )
@@ -43,8 +46,12 @@ export const userModel = () => {
   render(vm, div) // 将虚拟节点渲染到真实节点上
   document.body.appendChild(div)
   // eslint-disable-next-line no-unsafe-optional-chaining
-  const { showModel } = vm.component?.exposed as { showModel: (sure: () => void) => void }
+  const { showModel, hideModel } = vm.component?.exposed as {
+    showModel: (type: (sure: boolean, hidden: any) => void) => void
+    hideModel: () => void
+  }
   return {
-    showModel
+    showModel,
+    hideModel
   }
 }

@@ -56,7 +56,8 @@ const footerOperation = [
   },
   {
     text: 'footerOperation.me',
-    icon: 'contact-o'
+    icon: 'contact-o',
+    path: '/my'
   }
 ]
 </script>

@@ -1,35 +1,43 @@
 <template>
-  <van-overlay
-    :show="visible"
-    z-index="1000"
-    @click.self="emit('update:visible', false)"
-  >
-    <div class="toast">
-      <main>
-        <div class="title-warp">
-          <div class="title">{{ options.title }}</div>
+  <teleport to="body">
+    <div
+      class="mask"
+      @click.self="emit('update:visible', false)"
+      v-if="visible"
+    >
+      <div class="toast">
+        <main>
+          <div class="title-warp">
+            <div class="title">{{ options.title }}</div>
+          </div>
+          <div class="content-warp">
+            <slot>
+              <div class="content">{{ options.content }}</div>
+            </slot>
+          </div>
+          <div class="button-warp">
+            <slot name="footer">
+              <div
+                class="button"
+                @click="emit('ok')"
+              >
+                {{ options.text }}
+              </div>
+            </slot>
+          </div>
+        </main>
+        <div class="close">
+          <van-icon
+            @click="emit('update:visible', false)"
+            class-prefix="icon"
+            name="guanbi"
+            size="20"
+            color="#fff"
+          />
         </div>
-        <div class="content-warp">
-          <div class="content">{{ options.content }}</div>
-        </div>
-        <div
-          class="button-warp"
-          @click="emit('ok')"
-        >
-          <div class="button">{{ options.text }}</div>
-        </div>
-      </main>
-      <div class="close">
-        <van-icon
-          @click="emit('update:visible', false)"
-          class-prefix="icon"
-          name="guanbi"
-          size="20"
-          color="#fff"
-        />
       </div>
     </div>
-  </van-overlay>
+  </teleport>
 </template>
 <script lang="ts" setup>
 type Props = {
@@ -53,10 +61,11 @@ withDefaults(defineProps<Props>(), {
 })
 </script>
 <style lang="scss" scoped>
-:deep(.van-overlay) {
+.mask {
+  @apply fixed inset-0 overflow-hidden;
   background-color: rgba(0, 0, 0, 0.2);
-  overflow: hidden;
 }
+
 .toast {
   @apply fixed top-1/3 left-1/2 w-[50%] min-h-[100px];
   font-family: var(--font-family-text), serif;
@@ -76,9 +85,12 @@ withDefaults(defineProps<Props>(), {
       }
     }
     .button-warp {
-      @apply w-[75%] py-1.5 bg-black m-auto rounded-[20px] text-center text-[#fff] text-[15px] font-[500] mt-2 bg-[#157BFE];
-      background: linear-gradient(to top, #0071ff, #3c8fff);
-      box-shadow: 0 1px 5px 0 #3c8fff;
+      @apply w-full;
+      .button {
+        @apply w-[75%] py-1.5 bg-black m-auto rounded-[20px] text-center text-[#fff] text-[15px] font-[500] mt-2 bg-[#157BFE];
+        background: linear-gradient(to top, #0071ff, #3c8fff);
+        box-shadow: 0 1px 5px 0 #3c8fff;
+      }
     }
   }
   transform: translateX(-50%);

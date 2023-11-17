@@ -1,39 +1,41 @@
 <template>
-  <teleport to="#app">
+  <teleport to="body">
     <div
-      class="model"
+      class="fixed inset-0 z-40"
       v-if="visible"
     >
-      <div class="title">
-        <div class="avatar" />
-        <span>{{ title }}</span>
-      </div>
-      <main>
-        <div class="content">
-          <div class="text">你确定要删除与xxx的对话吗？</div>
+      <div class="model">
+        <div class="title">
+          <div class="avatar" />
+          <span>{{ title }}</span>
         </div>
-        <div class="tip">
-          <van-checkbox
-            shape="square"
-            v-model="check"
-            >&nbsp;同时删除xxx的消息</van-checkbox
+        <main>
+          <div class="content">
+            <div class="text">你确定要删除与xxx的对话吗？</div>
+          </div>
+          <div class="tip">
+            <van-checkbox
+              shape="square"
+              v-model="checked"
+              >&nbsp;同时删除xxx的消息</van-checkbox
+            >
+          </div>
+        </main>
+        <footer>
+          <div
+            class="cancel"
+            @click="cancel"
           >
-        </div>
-      </main>
-      <footer>
-        <div
-          class="cancel"
-          @click="cancel"
-        >
-          取消
-        </div>
-        <div
-          class="sure"
-          @click="ok"
-        >
-          删除对话
-        </div>
-      </footer>
+            取消
+          </div>
+          <div
+            class="sure"
+            @click="ok"
+          >
+            删除对话
+          </div>
+        </footer>
+      </div>
     </div>
   </teleport>
 </template>
@@ -43,12 +45,12 @@ type Props = {
   title: string
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   visible: true,
   title: '删除对话'
 })
 
-const check = ref(false)
+const checked = ref(false)
 
 const emit = defineEmits(['update:visible', 'ok', 'cancel'])
 
@@ -58,8 +60,17 @@ const cancel = () => {
 }
 
 const ok = () => {
-  emit('ok', check.value)
+  emit('ok', checked.value)
 }
+
+watch(
+  () => props.visible,
+  (newVal) => {
+    if (!newVal) {
+      checked.value = false
+    }
+  }
+)
 </script>
 <style lang="scss" scoped>
 .model {

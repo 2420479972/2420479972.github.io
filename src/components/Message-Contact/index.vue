@@ -6,26 +6,30 @@
     >
       <slot name="leftCheckbox" />
     </div>
-    <van-badge
-      :content="item.unread"
-      :show-zero="false"
-      :offset="[-10, 5]"
-    >
-      <div
-        class="chat-portrait"
-        :style="{ background: getRandomColor() }"
+    <slot name="portrait">
+      <van-badge
+        :content="item.unread"
+        :show-zero="false"
+        :offset="[-10, 5]"
       >
-        张
-      </div>
-    </van-badge>
+        <div
+          class="chat-portrait"
+          :style="{ background: getRandomColor() }"
+        >
+          张
+        </div>
+      </van-badge>
+    </slot>
 
     <div class="chat-content">
-      <Contact v-if="type === 'contact'">
-        <template #line-tip>
-          <slot name="line-tip" />
-        </template>
-      </Contact>
-      <Message v-else />
+      <slot>
+        <Contact v-if="type === 'contact'">
+          <template #line-tip>
+            <slot name="line-tip" />
+          </template>
+        </Contact>
+        <Message v-else />
+      </slot>
     </div>
     <div
       class="checkbox"
@@ -66,7 +70,7 @@ function getRandomColor() {
 </script>
 <style lang="scss" scoped>
 .message-contact {
-  @apply h-[80px] w-full flex pl-4 pr-4 items-center pt-1 relative;
+  @apply min-h-[80px] w-full flex pl-4 pr-4 items-center pt-1 relative py-1.5;
   .checkbox {
     @apply mr-4;
   }
