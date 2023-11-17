@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            transition: background-color 0.3s ease;
+            overflow: hidden; /* 防止页面滚动 */
+            background: black;
+        }
+
+        .ripple-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            background-color: rgba(255, 255, 255, 0.7);
+            animation: ripple-animation 1s linear;
+        }
+
+        @keyframes ripple-animation {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    </style>
+    <title>Theme Switcher with Ripple Effect</title>
+</head>
+<body>
+<div class="ripple-container" onclick="addRippleEffect(event)"></div>
+
+<script>
+    function toggleTheme() {
+        const body = document.body;
+        body.classList.toggle('dark-theme');
+    }
+
+    function addRippleEffect(event) {
+        const ripple = document.createElement('div');
+        ripple.className = 'ripple';
+
+        const rect = event.target.getBoundingClientRect();
+        const size = Math.max(window.innerWidth, window.innerHeight);
+
+        ripple.style.width = ripple.style.height = `${size}px`;
+        ripple.style.right = `${size / 2}px`;
+        ripple.style.bottom = `${size / 2}px`;
+
+        document.querySelector('.ripple-container').appendChild(ripple);
+
+        setTimeout(() => {
+            ripple.remove();
+        }, 1000);
+    }
+</script>
+</body>
+</html>

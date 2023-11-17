@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html{
+  --font-family-text:"华文仿宋";
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.4);
+  font-family: var(--font-family-text), serif;
+}
+body{
+  height: 100%;
+  width: 100%;
+  max-width: 1024px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+#app{
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+}
+
+@font-face {
+  font-family: "font-text"; /* Project id 4328611 */
+  src: url("font/arial.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import "font/font";
