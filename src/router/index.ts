@@ -47,10 +47,10 @@ const router = createRouter({
       path: '/register',
       component: () => import('@views/login-enroll/register/index.vue')
     },
-    {
-      path: '/find',
-      component: () => import('@views/find/index.vue')
-    },
+    // {
+    //   path: '/find',
+    //   component: () => import('@views/find/index.vue')
+    // },
     {
       path: '/my',
       component: () => import('@views/my/index.vue')

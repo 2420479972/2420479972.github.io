@@ -32,8 +32,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { Hamburg } from '../../ui-library/easy-components.tsx'
-import Header from '../../ui-library/header.vue'
+import Header from '@/ui-library/header.vue'
 import Game from './game.vue'
 const tabContent = ref<HTMLDivElement | any>()
 
