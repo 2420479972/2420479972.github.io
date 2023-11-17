@@ -21,8 +21,8 @@
 </template>
 <script lang="ts" setup>
 import Message from '@components/Message-Contact/index.vue'
-import { useToast } from '@/components/Toast/index.tsx'
-import { userModel } from '@/components/Model/index.tsx'
+import { useToast } from '../../../components/Toast/index.tsx'
+import { userModel } from '../../../components/Model/index.tsx'
 
 const { showModel } = userModel()
 

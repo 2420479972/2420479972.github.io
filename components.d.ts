@@ -11,7 +11,7 @@ declare module 'vue' {
     CutLayout: typeof import('./src/components/Cut-Layout/index.vue')['default']
     Footer: typeof import('./src/components/Layout/footer/Footer.vue')['default']
     Header: typeof import('./src/components/Layout/header/Header.vue')['default']
-    Index: typeof import('./src/components/Model/Index.tsx')['default']
+    Index: typeof import('./src/components/Model')['default']
     Layout: typeof import('./src/components/Layout/index.vue')['default']
     ListContact: typeof import('./src/components/Message-Contact/List-Contact.vue')['default']
     Message: typeof import('./src/components/Message-Contact/Message.vue')['default']
